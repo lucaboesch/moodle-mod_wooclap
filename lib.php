@@ -57,6 +57,8 @@ function wooclap_supports($feature) {
         case FEATURE_COMPLETION_TRACKS_VIEWS:
         case FEATURE_GRADE_OUTCOMES:
             return false;
+        case FEATURE_MOD_PURPOSE:
+            return MOD_PURPOSE_COMMUNICATION;
 
         default:
             return null;
@@ -220,9 +222,9 @@ function wooclap_http_build_query($data) {
 /**
  * Check if the user has access to the activity.
  *
- * @param  int $courseid
- * @param  int $cmid
- * @param  int $userid
+ * @param  int $courseid The course id
+ * @param  int $cmid The course module id.
+ * @param  int $userid The user id.
  * @return bool
  * @throws moodle_exception
  */
@@ -427,7 +429,7 @@ function wooclap_validate_callback_url($callbackurl) {
 /**
  * Update mod_wooclap grades in the gradebook.
  *
- * Needed by {@link grade_update_mod_grades()}.
+ * Needed by {@see grade_update_mod_grades()}.
  *
  * @param stdClass $moduleinstance Instance object with extra cmidnumber and modname property.
  * @param int $userid Update grade of specific user only, 0 means all participants.
@@ -450,12 +452,12 @@ function wooclap_update_grades(stdClass $moduleinstance, int $userid = 0): void 
 }
 
 /**
- *  Update a wooclap grade.
+ * Update a wooclap grade.
  *
- * @param $wooclap the wooclap activity.
- * @param $userid
- * @param $gradeval
- * @param $completionstatus
+ * @param object $wooclap the wooclap activity.
+ * @param int $userid The user id.
+ * @param float $gradeval The grade value.
+ * @param int $completionstatus The completion status.
  * @return bool
  * @throws dml_exception
  */
