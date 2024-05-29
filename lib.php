@@ -425,12 +425,37 @@ function wooclap_validate_callback_url($callbackurl) {
 }
 
 /**
- * Update a wooclap grade.
+ * Update mod_wooclap grades in the gradebook.
  *
- * @param object $wooclap The wooclap activity.
- * @param int $userid The user id.
- * @param float $gradeval
- * @param int $completionstatus
+ * Needed by {@link grade_update_mod_grades()}.
+ *
+ * @param stdClass $moduleinstance Instance object with extra cmidnumber and modname property.
+ * @param int $userid Update grade of specific user only, 0 means all participants.
+ */
+function wooclap_update_grades(stdClass $moduleinstance, int $userid = 0): void {
+    global $CFG;
+    require_once($CFG->libdir . '/gradelib.php');
+    if ($moduleinstance->grade == 0) {
+        wooclap_grade_item_update($moduleinstance);
+    } else if ($grades = wooclap_get_user_grades($moduleinstance, $userid)) {
+        foreach ($grades as $k => $v) {
+            if ($v->rawgrade == -1) {
+                $grades[$k]->rawgrade = null;
+            }
+        }
+        wooclap_grade_item_update($moduleinstance, $grades);
+    } else {
+        wooclap_grade_item_update($moduleinstance);
+    }
+}
+
+/**
+ *  Update a wooclap grade.
+ *
+ * @param $wooclap the wooclap activity.
+ * @param $userid
+ * @param $gradeval
+ * @param $completionstatus
  * @return bool
  * @throws dml_exception
  */
