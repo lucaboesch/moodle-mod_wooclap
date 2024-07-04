@@ -20,7 +20,9 @@
  *
  * https://docs.moodle.org/dev/CLI_scripts
  *
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package   mod_wooclap
+ * @copyright 2018 Cblue sprl
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 define('CLI_SCRIPT', true);
