@@ -296,14 +296,13 @@ class mod_wooclap_observer {
         $instance = $DB->get_record($cm->modname, ['id' => $cm->instance], '*', MUST_EXIST);
 
         // Update the grade item name.
-        $gradeitem = $DB->get_record('grade_items', ['iteminstance' => $cm->instance, 'itemmodule' => $cm->modname], '*',
-            MUST_EXIST);
+        $gradeitem = $DB->get_record('grade_items', ['iteminstance' => $cm->instance, 'itemmodule' => $cm->modname], '*', MUST_EXIST);
         if ($gradeitem) {
             $gradeitem->itemname = $instance->name;
             $DB->update_record('grade_items', $gradeitem);
         }
 
-        // Update the name within Wooclap.
+        // Update the name within Wooclap
         self::rename_wooclap_event($instance->linkedwooclapeventslug, $instance->name);
     }
 
