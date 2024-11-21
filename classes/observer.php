@@ -277,8 +277,7 @@ class mod_wooclap_observer {
 
     /**
      * Updates the gradebook item and the Wooclap event when the activity is updated (ex. when name is changed).
-     *
-     * @param  \core\event\course_module_updated $event
+     * @param \core\event\course_module_updated $event
      * @throws coding_exception
      * @throws dml_exception
      * @throws moodle_exception
