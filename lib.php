@@ -749,3 +749,37 @@ function wooclap_is_valid_callback_url($callbackurl) {
     $baseurl = trim(get_config('wooclap', 'baseurl'), '/');
     return $callbackurl != null && strpos($callbackurl, $baseurl) === 0;
 }
+
+/**
+ * Return grade for given user or all users.
+ *
+ * @param object $wooclap the wooclap activity.
+ * @param int $userid optional user id, 0 means all users
+ * @return array array of grades, false if none
+ * @throws dml_exception
+ */
+function wooclap_get_user_grades(object $wooclap, $userid = 0) {
+    global $DB;
+
+    $params = [$wooclap->id];
+    $usertest = '';
+    if ($userid) {
+        $params[] = $userid;
+        $usertest = 'AND u.id = ?';
+    }
+
+    return $DB->get_records_sql("
+            SELECT
+                u.id,
+                u.id AS userid,
+                gri.grade AS rawgrade,
+                gri.timemodified AS dategraded,
+                gri.timecreated) AS datesubmitted
+
+            FROM {user} u
+            JOIN {grade_items} gri ON u.id = gri.userid
+
+            WHERE gri.iteminstance = ? AND gri.itemmodule = 'wooclap'
+            $usertest
+            ", $params);
+}
