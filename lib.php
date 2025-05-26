@@ -837,3 +837,46 @@ function wooclap_callback_matches_base_host($baseurl, $callbackurl) {
 function wooclap_is_valid_callback_url($callbackurl) {
     return wooclap_callback_matches_base_host(get_config('wooclap', 'baseurl'), $callbackurl);
 }
+
+/**
+ * Return grade for given user or all users.
+ *
+ * @param object $wooclap the wooclap activity.
+ * @param int $userid optional user id, 0 means all users
+ * @return array array of grades
+ * @throws dml_exception
+ */
+function wooclap_get_user_grades(object $wooclap, $userid = 0) {
+    global $DB;
+
+    $params = [$wooclap->id];
+    $usertest = '';
+    if ($userid) {
+        $params[] = $userid;
+        $usertest = 'AND userid = ?';
+    }
+
+    // The gradebook api gets these fields from the wooclap activity:
+    // userid, rawgrade, dategraded, datesubmitted.
+    $res = $DB->get_records_sql("
+            SELECT
+                userid,
+                grade AS rawgrade,
+                timemodified AS datesubmitted,
+                timecreated AS datecreated
+            FROM {wooclap_completion}
+            WHERE wooclapid = ?
+            $usertest
+        ",
+        $params
+    );
+    // The fields feedback, feedbackformat and usermodified are not stored in the Wooclap
+    // plugin, so we fill default values.
+    return array_map(function($row) {
+        $row->feedback = '';
+        $row->feedbackformat = FORMAT_MOODLE;
+        $row->usermodified = 0;
+        return $row;
+    }, $res);
+}
+
