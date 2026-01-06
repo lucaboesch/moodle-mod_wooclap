@@ -121,7 +121,7 @@ class mod_wooclap_mod_form extends moodleform_mod {
             'version' => get_config('mod_wooclap')->version,
         ];
 
-        $curldata = new StdClass();
+        $curldata = new stdClass();
         $curldata->moodleUsername = $USER->username;
         $curldata->accessKeyId = $accesskeyid;
         $curldata->email = $USER->email;
@@ -229,4 +229,3 @@ class mod_wooclap_mod_form extends moodleform_mod {
         return ($data['customcompletion'] != 0);
     }
 }
-

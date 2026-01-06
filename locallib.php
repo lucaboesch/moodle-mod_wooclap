@@ -65,7 +65,7 @@ function mod_wooclap_v3_upgrade() {
         'version' => $version,
     ];
 
-    $curldatastep1 = new StdClass();
+    $curldatastep1 = new stdClass();
     $curldatastep1->accessKeyId = $accesskeyid;
     $curldatastep1->ts = $ts;
     $curldatastep1->token = wooclap_generate_token(
@@ -101,7 +101,7 @@ function mod_wooclap_v3_upgrade() {
             'version' => $version,
         ];
 
-        $curldatastep2 = new StdClass();
+        $curldatastep2 = new stdClass();
         $curldatastep2->accessKeyId = $accesskeyid;
         $curldatastep2->idsToUsernamesMapping = $jsonmapping;
         $curldatastep2->ts = $ts;

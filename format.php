@@ -30,7 +30,6 @@ require_once($CFG->dirroot . '/question/format/xml/format.php');
  * Class to represent a wooclap file.
  */
 class qformat_wooclap extends qformat_xml {
-
     /**
      * Do the export
      *
