@@ -229,4 +229,3 @@ class mod_wooclap_mod_form extends moodleform_mod {
         return ($data['customcompletion'] != 0);
     }
 }
-

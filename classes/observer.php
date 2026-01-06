@@ -163,7 +163,7 @@ class mod_wooclap_observer {
             'version' => get_config('mod_wooclap')->version,
         ];
 
-        $curldata = new StdClass();
+        $curldata = new stdClass();
         $curldata->name = $wooclap->name;
 
         $curldata->description = isset($wooclap->intro)
@@ -319,7 +319,7 @@ class mod_wooclap_observer {
      * @throws dml_exception
      */
     private static function rename_wooclap_event($slug, $name) {
-        $data = new StdClass();
+        $data = new stdClass();
 
         $data->slug = $slug;
         $data->name = $name;

@@ -26,7 +26,7 @@
 // https://docs.moodle.org/dev/Privacy_API/Utilities .
 
 define('CLI_SCRIPT', true);
-require(__DIR__.'/../../../config.php');
+require(__DIR__ . '/../../../config.php');
 
 // Set this if you want to run the script for one component only. Otherwise leave empty.
 $checkcomponent = '';
