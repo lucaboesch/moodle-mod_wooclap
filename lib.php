@@ -842,7 +842,8 @@ function wooclap_get_user_grades(object $wooclap, $userid = 0) {
 
     // The gradebook api gets these fields from the wooclap activity:
     // userid, rawgrade, dategraded, datesubmitted.
-    $res = $DB->get_records_sql("
+    $res = $DB->get_records_sql(
+        "
             SELECT
                 userid,
                 grade AS rawgrade,
@@ -856,11 +857,10 @@ function wooclap_get_user_grades(object $wooclap, $userid = 0) {
     );
     // The fields feedback, feedbackformat and usermodified are not stored in the Wooclap
     // plugin, so we fill default values.
-    return array_map(function($row) {
+    return array_map(function ($row) {
         $row->feedback = '';
         $row->feedbackformat = FORMAT_MOODLE;
         $row->usermodified = 0;
         return $row;
     }, $res);
 }
-

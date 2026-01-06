@@ -33,6 +33,8 @@ use core_privacy\local\request\contextlist;
 use core_privacy\local\request\userlist;
 use core_privacy\local\request\writer;
 
+// phpcs:disable PSR1.Classes.ClassDeclaration.MultipleClasses
+
 defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->libdir . '/filelib.php');
