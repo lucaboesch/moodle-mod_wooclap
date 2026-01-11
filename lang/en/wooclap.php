@@ -30,7 +30,19 @@ defined('MOODLE_INTERNAL') || die;
 
 $string['modulename'] = 'Wooclap';
 $string['modulenameplural'] = 'Wooclap';
-$string['modulename_help'] = 'This module provides a Wooclap interactive platform integration to Moodle';
+$string['modulename_help'] = '
+###### Key features
+- Create a Wooclap activity directly in Moodle
+- Authenticate students via Moodle without having to provide credentials again
+- Track Wooclap reports through Moodle
+
+###### Ways to use it
+- Increase interaction during lectures or online sessions
+- Collect immediate feedback from students
+- Identify gaps in student knowledge
+- Improve attention and engagement in class
+- Enhance long-term retention of learning materials';
+$string['modulename_summary'] = 'This module provides a Wooclap interactive platform integration to Moodle';
 $string['pluginname'] = 'Wooclap';
 $string['pluginadministration'] = 'Wooclap administration';
 $string['wooclapname'] = 'Name';
